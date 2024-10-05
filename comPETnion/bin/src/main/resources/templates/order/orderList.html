@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>所有訂單</title>
+	<style>
+		.order-actions {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+		}
+		.order-actions a,
+		.order-actions form {
+			margin-left: 10px;
+		}
+		.order-actions form {
+			margin: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:replace="~{layout/header}"></div>
+
+	<main>
+		<div id="ordersContainer">
+			<div th:each="order : ${allOrderByMemberId}" class="order-container">
+				<div class="order-header">
+					<h3 th:text="'訂單編號: ' + ${order.orderId}">訂單編號:</h3>
+					<span th:text="'訂單時間: ' + ${order.createTime}"></span>
+					<span th:text="'總金額: ' + ${order.totalCost} + '元'"></span>
+					<span th:text="'訂單狀態: ' + ${order.orderStatusId}"></span>
+				</div>
+
+				<div class="order-actions">
+					<a th:href="@{/OrderDetailList(orderId=${order.orderId})}">
+						<button type="button">查看詳情</button>
+					</a>
+					<form th:if="${order.orderStatusId == 1}" th:action="@{/ecpayCheckout}" method="post">
+						<input type="hidden" name="orderId" th:value="${order.orderId}">
+						<button type="submit">結帳</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<div th:replace="~{layout/footer}"></div>
+
+	<script>
+	</script>
+</body>
+
+</html>

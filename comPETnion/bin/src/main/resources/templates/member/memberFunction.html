@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:replace="~{member/navbarMember}"></div>
+
+<div class="side-menu">
+	<h1>會員中心</h1>
+	<input type="hidden" name="memberEmail" th:value="${member.memberEmail}">
+		<a th:href="@{/members/getmember(memberEmail=${member.memberEmail})}">我的帳戶</a>
+		<!--  <a href="jsp/mail/ReceiveAllEmail.jsp?memberId=${member.memberId}">會員信箱</a>-->
+		<!--  <a href="#">消息通知</a>
+		<a href="#">購物清單</a>
+		<a href="#">積分兌換</a>
+		<a href="#">帳戶保安</a> 
+		<a href="#">賬戶反饋</a> 
+		<a href="#">優惠券管理</a>
+		<a href="#">客戶服務</a>-->
+	</div>
+
+</body>
+</html>

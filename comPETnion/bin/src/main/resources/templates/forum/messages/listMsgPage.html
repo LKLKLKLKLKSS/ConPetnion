@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>列出訊息</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .container {
+        margin-top: 20px;
+    }
+    .card {
+        margin-bottom: 15px;
+    }
+    .edit-btn {
+        display: flex;
+        justify-content: space-between;
+    }
+    .pagination {
+        justify-content: center;
+    }
+</style>
+</head>
+<body>
+   <div th:replace="~{layout/navbarForum}"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center">列出訊息</h1>
+                
+                <th:block th:each="oneMsg : ${page.content}">
+                    <div class="card">
+                        <div class="card-header">
+                            最新訊息的時間: 
+                            <span th:text="${#dates.format(oneMsg.messageDate, 'yyyy年MM月dd日 HH:mm:ss EEEE')}"></span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">訊息內容</h5>
+                            <p class="card-text">
+                                <span th:text="${oneMsg.messageContent}"></span> <br>
+                            </p>
+                            <div class="edit-btn">
+                                <a th:href="@{/messages/edit(id=${oneMsg.messagesId})}" class="btn btn-outline-success btn-sm">編輯</a>
+                                <form method="post" th:action="@{/messages/delete}">
+                                    <input name="id" th:value="${oneMsg.messagesId}" type="hidden" />
+                                    <input name="_method" value="DELETE" type="hidden" />
+                                    <input type="submit" value="刪除" onclick="return confirm('確定刪除嗎?')" class="btn btn-outline-danger btn-sm">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+
+                <div class="text-center" th:text="'總共有 ' + ${page.totalElements} + ' 筆'"></div>
+                
+                <ul class="pagination" th:if="${page.totalPages != 0}">
+                    <li th:classappend="${page.number == 0} ? 'page-item disabled' : 'page-item'">
+                        <a class="page-link" th:href="@{/messages/page(p=${page.number})}">上一頁</a>
+                    </li>
+                    <th:block th:each="pageNumber : ${#numbers.sequence(1, page.totalPages)}">
+                        <li th:classappend="${page.number + 1 == pageNumber} ? 'page-item active' : 'page-item'">
+                            <a class="page-link" th:href="@{/messages/page(p=${pageNumber})}" th:text="${pageNumber}"></a>
+                        </li>
+                    </th:block>
+                    <li th:classappend="${page.number + 1 == page.totalPages} ? 'page-item disabled' : 'page-item'">
+                        <a class="page-link" th:href="@{/messages/page(p=${page.number + 2})}">下一頁</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

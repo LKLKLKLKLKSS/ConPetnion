@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+   <meta charset="UTF-8">
+   <title>帖子資料處理</title>
+</head>
+<style>
+   .forumPhoto {
+      height: 50px;
+   }
+
+   .postContent {
+      width: 40%;
+   }
+</style>
+
+<body style="background-color: #fdf5e6">
+<div th:replace="~{layout/navbarForum}"></div>
+   <header>
+      <h1>帖子資料處理</h1>
+      <nav>
+         <form method="post" th:action="@{/findAllPost}">
+            <div class="form-group">
+               <label for="postName">查詢:</label>
+               <input type="text" name="postName" id="postName" placeholder="查詢所有">
+               <label for="postShow">是否顯示:</label>
+               <select name="postShow" id="postShow">
+                  <option value="">全部</option>
+                  <option value="true">顯示</option>
+                  <option value="false">不顯示</option>
+               </select>
+               <button type="submit">查詢</button>
+            </div>
+         </form>
+         <a th:href="@{/forum/insertPost}">
+            <button>新增</button>
+         </a>
+      </nav>
+   </header>
+   <div align="center">
+      <h2>帖子</h2>
+      <form method="get" th:action="@{/findAllPost}">
+         <table border="1">
+            <tr style="background-color: #a8fefa;">
+               <th>帖子Id</th>
+               <th>帖子名稱</th>
+               <th class="postContent">帖子內容</th>
+               <th>發佈日期</th>
+               <th>是否顯示</th>
+               <th>修改</th>
+               <th>刪除</th>
+            </tr>
+            <tr th:each="postBean : ${arrayList}">
+               <td th:text="${postBean.postId}"></td>
+               <td th:text="${postBean.postName}"></td>
+               <td th:text="${postBean.postContent}"></td>
+               <td th:text="${postBean.postDate}"></td>
+               <td th:text="${postBean.postShow} ? '是' : '否'"></td>
+               <td><a th:href="@{/findByPostIdUpdate(id=${postBean.postId})}">修改</a></td>
+               <td>
+                  <a class="delete" th:href="@{/post/delete(id=${postBean.postId})}"
+                     onclick="return confirm('你確定要刪除這個帖子嗎？');">刪除</a>
+               </td>
+            </tr>
+         </table>
+
+      </form>
+   </div>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>

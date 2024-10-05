@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>會員註冊頁面</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+	<div th:replace="~{layout/navbarMember}"></div>
+	<div class="container">
+		<h2>會員註冊</h2>
+		<form name="registrationForm" th:action="@{/members/registermember}"
+			method="POST" enctype="multipart/form-data">
+			會員照片上傳:<input type="file" name="memberImg"><br> 姓名: <input
+				type="text" name="memberName" required><br> 帳號: <input
+				type="email" name="memberEmail" required><br> 密碼: <input
+				type="password" name="memberPassword" required><br>
+			出生日期: <input type="date" name="memberAge" id="memberAge" required><br>
+			電話: <input type="tel" name="memberPhone" required><br>
+			地址: <select name="memberAddress" required>
+				<option value="台北市">台北市</option>
+				<option value="新北市">新北市</option>
+				<option value="桃園市">桃園市</option>
+				<option value="台中市">台中市</option>
+				<option value="台南市">台南市</option>
+				<option value="高雄市">高雄市</option>
+				<option value="基隆市">基隆市</option>
+				<option value="新竹市">新竹市</option>
+				<option value="新竹縣">新竹縣</option>
+				<option value="苗栗縣">苗栗縣</option>
+				<option value="彰化縣">彰化縣</option>
+				<option value="南投縣">南投縣</option>
+				<option value="雲林縣">雲林縣</option>
+				<option value="嘉義市">嘉義市</option>
+				<option value="嘉義縣">嘉義縣</option>
+				<option value="屏東縣">屏東縣</option>
+				<option value="宜蘭縣">宜蘭縣</option>
+				<option value="花蓮縣">花蓮縣</option>
+				<option value="台東縣">台東縣</option>
+				<option value="澎湖縣">澎湖縣</option>
+				<option value="金門縣">金門縣</option>
+				<option value="連江縣">連江縣</option>
+			</select><br> <input type="submit" value="註冊">
+		</form>
+	</div>
+
+
+	<script th:inline="javascript">
+        swal("電子信箱已被註冊", "請換其他電子信箱註冊", "error");
+    </script>
+	<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('memberAge').setAttribute('max', today);
+    });
+</script>
+
+
+</body>
+</html>

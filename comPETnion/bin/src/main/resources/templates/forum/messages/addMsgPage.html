@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" >
+<head>
+<meta charset="UTF-8">
+<title>新增訊息</title>
+</head>
+<body>
+<div th:replace="~{layout/navbarForum}"></div>
+
+<div class="container">
+
+<h1>新增訊息</h1>
+
+<div class="card">
+  <div class="card-header">
+    新訊息
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">請輸入新訊息</h5>
+    <form th:action="@{/messages/addPost}" method="post">
+       <textarea class="form-control" name="messageContent" required ></textarea>
+    
+    <br>
+    <input type="submit" class="btn btn-primary" value="送出">
+    </form>
+  </div>
+</div>
+
+<br>
+
+<div class="card">
+  <div class="card-header">
+    最新訊息的時間: 
+    <span th:text="${lastestMsg != null} ? ${#dates.format(lastestMsg.messageDate, 'yyyy年MM月dd日 HH:mm:ss EEEE')} : '無訊息'"></span>
+  </div>
+  
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+
+    <p class="card-text">
+      <span th:text="${lastestMsg != null} ? ${lastestMsg.messageContent} : '無訊息'"></span>
+    </p>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>

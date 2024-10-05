@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>comPETnion</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.css" rel="stylesheet" />
+    <link href="../dashboard/css/styles.css" rel="stylesheet" />
+    <style>
+        .nav-link {
+            display: flex;
+            align-items: center;
+            color: black !important;
+            margin: 0 0 0 20px;
+        }
+        .nav-link .sb-nav-link-icon {
+            margin-right: 8px;
+        }
+        .sb-sidenav-menu-nested .nav-link {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 1.5rem;
+            color: black !important;
+        }
+        .sb-sidenav-collapse-arrow {
+            color: black !important;
+        }
+        .logosize{
+            max-width: 100%; 
+            height: 53px; 
+            margin-left: 20px   
+        }
+    </style>
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand ps-3" href="index.html"><img src="index/images/comPETnionbacklogoflat.png" alt="logo" class="logosize"></a>
+       
+    </nav>
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">會員</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOrders1" aria-expanded="false" aria-controls="collapseOrders1">
+                            
+                            會員管理
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseOrders1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">
+                                    管理帳號
+                                </a>
+                            </nav>
+                        </div>
+                        
+                        <div class="sb-sidenav-menu-heading">商城</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#shopping" aria-expanded="false" aria-controls="collapseOrders1">
+                            
+                            商品管理
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="shopping" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">
+                                    測試11
+                                </a>
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">領養</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#adopt">
+                            
+                            領養確認
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="adopt" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">
+                                    測試11
+                                </a>
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">活動</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#event">
+                            
+                            活動管理
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="event" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">
+                                    測試11
+                                </a>
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">討論版</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#forum">
+                            
+                            討論版管理
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="forum" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">
+                                    測試11
+                                </a>
+                            </nav>
+                        </div>
+                       
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#order">
+                            
+                            訂單管理
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="order" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">
+                                    測試11
+                                </a>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </nav>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../dashboard/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="../dashboard/assets/demo/chart-area-demo.js"></script>
+    <script src="../dashboard/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="../dashboard/js/datatables-simple-demo.js"></script>
+</body>
+</html>

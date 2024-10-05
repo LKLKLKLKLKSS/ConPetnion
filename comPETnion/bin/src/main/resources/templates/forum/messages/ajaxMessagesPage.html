@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>ajax訊息</title>
+</head>
+<body>
+<div th:replace="~{layout/navbarForum}"></div>
+
+	<div class="container">
+
+		<h1>ajax訊息</h1>
+
+		<h3>新增一筆訊息後，回傳最新的前三筆，印到 table 上(用 axios)</h3>
+
+		<form id="myMsgForm" action="#">
+			<input id="myMsg" required /> <br> <br>
+			<button id="submitBtn">送出</button>
+
+		</form>
+
+		<div>
+			<table id="list_table_json">
+				<thead>
+					<tr>
+						<th>留言內容</th>
+						<th>留言時間</th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+
+		</div>
+
+
+
+	</div>
+
+	<script type="text/javascript">
+const submitBtn = document.getElementById('submitBtn');
+submitBtn.addEventListener('click',(event) =>{
+  event.preventDefault(); // 取消 form 預設的送出 (form 內有 sumbit 要寫，不然表單會送出)  
+  
+  const inputText = document.getElementById('myMsg').value;
+  const dtoObject = {"text":inputText};  // js 物件
+  const dtoJsonString = JSON.stringify(dtoObject);  // 將 js 物件轉換為 JSON 字串
+  console.log('dtoJsonString: ' + dtoJsonString);
+  let url = 'http://localhost:8081/myapp/messages/ajaxPost';
+
+  axios({
+    method:'post',
+    url: url,
+    data: {
+      text:inputText
+    }
+  })
+  .then(res =>{
+     document.getElementById("myMsgForm").reset();
+  
+    htmlMaker(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+
+})
+
+function htmlMaker(data){
+  msg_data = '<tbody>';
+      data.content.forEach(el =>{
+      msg_data += '<tr>'
+      msg_data += '<td>' + el.text + '</td>'
+      msg_data += '<td>' + el.added + '</td>'
+      msg_data += '</tr>'
+    })
+      msg_data += '</tbody>';
+
+  let totalPages = data.totalPages
+
+  for(var i = 1;i <= totalPages ;i++){
+    msg_data += '<button class="pageBtn" data-pageid="'+ i  +'">' + i + '</button>'
+  }
+    
+  var myTable = document.getElementById("list_table_json"); // Get the table
+    
+  myTable.getElementsByTagName("tbody")[0].innerHTML = msg_data;
+
+  let pageBtns = document.getElementsByClassName('pageBtn')
+
+  for(i= 0; i< pageBtns.length;i++){
+    pageBtns[i].addEventListener('click', function(e){
+      let pageId = this.getAttribute("data-pageid")
+      loadThatPage(pageId)
+    })
+  }
+}
+
+
+function loadThatPage(pageId){
+  // console.log('有按到' + pageId)
+
+  axios.get('http://localhost:8081/myapp/messages/api/page', {
+    params: {
+      p: pageId
+    }
+  })
+  .then(res => {
+    htmlMaker(res.data)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+
+}
+
+
+</script>
+
+</body>
+</html>

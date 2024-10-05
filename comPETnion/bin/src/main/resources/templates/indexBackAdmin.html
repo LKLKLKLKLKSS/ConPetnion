@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Long+Cang&family=ZCOOL+KuaiLe&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap"
+        rel="stylesheet">
+
+    <title>comPETnion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(http://pic.bizhi360.com/bpic/79/5779.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            justify-content: center;
+            text-align: center;
+            margin: -50px;
+        }
+
+        h1 {
+            color: #A0522D;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 85px;
+            font-family: "Indie Flower", cursive;
+            font-weight: lighter;
+            font-style: normal;
+        }
+
+        .nav {
+            display: flex;
+            /* 將連結水平排列 */
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #F4A460;
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        .nav .icon-wrapper {
+            display: flex;
+            align-items: center;
+            /* 對齊圖標和文字 */
+            padding: 10px;
+            margin: 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            /* 平滑變色效果 */
+        }
+
+        .nav .icon-wrapper:hover {
+            background-color: #F5DEB3;
+        }
+
+        .nav .icon {
+            color: #fff;
+            background: #F4A460;
+            border-radius: 10%;
+            font-size: 50px;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            /* 調整圖標和文字的間距 */
+        }
+
+        i {
+            font-size: 28px;
+        }
+
+        .pei {
+            margin-bottom: -90px;
+            margin-left: 10px;
+        }
+
+        .ban {
+            margin-top: -110px;
+            margin-left: 10px;
+        }
+
+        .char {
+            font-family: "Long Cang", cursive;
+            font-weight: 400;
+            font-style: normal;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="pei">
+            <h1 class="char">陪</h1>
+        </div>
+        <div>
+            <h1>comPETnion</h1>
+        </div>
+        <div class="ban">
+            <h1 class="char">伴</h1>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <a th:href="@{/admin/login}">會員</a>
+        </div>
+
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <a href="product/indexProduct">商城</a>
+        </div>
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="fas fa-paw"></i>
+            </div>
+            <a href="indexpage">領養</a>
+        </div>
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="far fa-calendar-check"></i>
+            </div>
+            <a href="event.searchPage">活動</a>
+        </div>
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="far fa-comments"></i>
+            </div>
+            <a href="findAllTheme">討論版</a>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<style>
+		/* 自定義樣式 */
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f9f9f9;
+			color: #333;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			background-color: #ff6f61;
+			color: white;
+			padding: 10px 0;
+			text-align: center;
+		}
+
+		header .logo {
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+		header nav ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+		}
+
+		header nav ul li {
+			margin: 0 15px;
+		}
+
+		header nav ul li a {
+			color: white;
+			text-decoration: none;
+			font-weight: bold;
+		}
+
+		.search-bar {
+			display: flex;
+			justify-content: center;
+			margin-top: 10px;
+		}
+
+		.search-bar input {
+			padding: 5px;
+			font-size: 16px;
+		}
+
+		.search-bar button {
+			padding: 5px 10px;
+			font-size: 16px;
+			background-color: #fff;
+			color: #ff6f61;
+			border: 2px solid #ff6f61;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+
+		.navbar {
+			background-color: #333;
+			color: white;
+			padding: 10px 0;
+			text-align: center;
+		}
+
+		.navbar ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+		}
+
+		.navbar ul li {
+			margin: 0 15px;
+		}
+
+		.navbar ul li a {
+			color: white;
+			text-decoration: none;
+			font-weight: bold;
+		}
+
+		main {
+			padding: 20px;
+			margin-top: 20px;
+		}
+
+		.order-container {
+			width: 80%;
+			margin: auto;
+			background-color: white;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			border-radius: 8px;
+			margin-bottom: 20px;
+		}
+
+		.order-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 1px solid #ddd;
+			padding-bottom: 10px;
+		}
+
+		.order-actions {
+			text-align: right;
+			margin-top: 10px;
+		}
+
+		.order-actions button {
+			background-color: #ff6f61;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			cursor: pointer;
+			border-radius: 5px;
+			margin-left: 10px;
+		}
+
+		footer {
+			background-color: #333;
+			color: white;
+			padding: 10px 0;
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		footer nav ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+		}
+
+		footer nav ul li {
+			margin: 0 15px;
+		}
+
+		footer nav ul li a {
+			color: white;
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<div class="logo">comPETnion</div>
+		<nav>
+			<ul>
+				<li><a th:href="@{/homepage}">首頁</a></li>
+				<li><a th:href="@{/GetAllProduct}">comPETnion商城</a></li>
+			</ul>
+		</nav>
+		<div class="search-bar">
+			<input type="text" placeholder="搜尋">
+			<button>搜尋</button>
+		</div>
+	</header>
+
+	<div class="navbar">
+		<nav>
+			<ul>
+				<li><a th:href="@{/checkout}">所有訂單</a></li>
+				<li><a th:href="@{/checkOrder?orderStatus=1}">未付款訂單</a></li>
+				<li><a th:href="@{/checkOrder?orderStatus=2}">已付款訂單</a></li>
+				<li><a th:href="@{/checkOrder?orderStatus=3}">已完成訂單</a></li>
+				<li><a th:href="@{/checkOrder?orderStatus=4}">交易取消訂單</a></li>
+			</ul>
+		</nav>
+	</div>
+
+
+</body>
+

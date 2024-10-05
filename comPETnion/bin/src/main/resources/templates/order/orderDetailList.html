@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>訂單詳細信息</title>
+</head>
+<body>
+	<div th:replace="~{layout/header}"></div>
+	<main>
+		<div class="order-container">
+			<h2>訂單詳細信息</h2>
+			<div th:each="item : ${orderDetails}" class="order-item">
+				<img th:src="${item.productImageMain}" alt="商品圖片">
+				<div class="order-item-details">
+					<h3 th:text="${item.productTitle}">商品標題</h3>
+				</div>
+				<div class="order-item-quantity">
+					<p th:text="'數量: ' + ${item.quantity}">數量:</p>
+				</div>
+
+				<div class="order-item-total">
+					<p th:text="'總價: ' + ${item.cost} + '元'">總價:</p>
+				</div>
+			</div>
+			<div class="total-price">
+				<p>
+					訂單總價：<span th:text="${totalPrice} + '元'"></span>
+				</p>
+			</div>
+		</div>
+	</main>
+
+	<div th:replace="~{layout/footer}"></div>
+
+	<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        updateTotalPrice();
+    });
+
+    
+</script>
+
+</body>
+</html>

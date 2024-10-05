@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車</title>
+</head>
+<style>
+    
+
+    .cart-container {
+        width: 80%;
+        margin: auto;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    .cart-item img {
+        width: 100px;
+        height: auto;
+    }
+
+    .cart-item-details {
+        flex-grow: 1;
+        margin-left: 20px;
+    }
+
+    .cart-item-details h2 {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .cart-item-details p {
+        margin: 5px 0 0;
+    }
+
+    .cart-item-actions {
+        display: flex;
+        align-items: center;
+    }
+
+    .cart-item-actions button {
+        width: 30px;
+        height: 30px;
+        background-color: #ff6f61;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .cart-item-actions input {
+        width: 50px;
+        height: 30px;
+        text-align: center;
+        border: 1px solid #ccc;
+        margin: 0 5px;
+    }
+
+    .total-price {
+        text-align: right;
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    button.checkout {
+        background-color: #ff6f61;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        display: block;
+        margin: 20px auto 0;
+    }
+</style>
+
+<body>
+    <div th:replace="~{layout/header}"></div>
+
+    <main>
+        <div class="cart-container">
+            <div th:each="item : ${memberShoppingCartById}" class="cart-item" th:data-item-id="${item.productId}"
+                th:data-item-price="${item.productPrice}">
+                <img th:src="@{${item.productImageMain}}" alt="商品圖片">
+                <div class="cart-item-details" th:with="priceId='price-' + ${item.productId}">
+                    <h2 th:text="${item.productTitle}"></h2>
+                    <p th:id="${priceId}" th:text="${item.productPrice} + '元'"></p>
+                </div>
+                <div class="cart-item-actions">
+                    <button type="button" onclick="decreaseQuantity(this)">-</button>
+                    <input type="text" th:id="'quantity-' + ${item.productId}" th:value="${item.quantity}" readonly>
+                    <button type="button" onclick="increaseQuantity(this)">+</button>
+                    <a th:href="@{/RemoveItem(productId=${item.productId})}">
+                        <button type="button" class="removeItem">x</button>
+                    </a>
+                </div>
+            </div>
+            <div class="total-price">
+                總價：<span id="total-price" th:text="0 + '元'">0元</span>
+            </div>
+            <button type="button" class="checkout" onclick="checkout()">結帳</button>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/footer}"></div>
+
+    <form id="checkout-form" th:action="@{/checkout}" method="post" style="display: none;">
+        <input type="hidden" name="items" id="form-items">
+        <input type="hidden" name="totalPrice" id="form-total-price">
+    </form>
+
+    <script th:inline="javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            updateTotalPrice();
+        });
+
+        function decreaseQuantity(button) {
+            var cartItem = button.closest('.cart-item');
+            var quantityInput = cartItem.querySelector('input[type="text"]');
+            var quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
+                updateTotalPrice();
+            }
+        }
+
+        function increaseQuantity(button) {
+            var cartItem = button.closest('.cart-item');
+            var quantityInput = cartItem.querySelector('input[type="text"]');
+            var quantity = parseInt(quantityInput.value);
+            quantityInput.value = quantity + 1;
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            var totalPrice = 0;
+            document.querySelectorAll('.cart-item').forEach(function (cartItem) {
+                var quantityInput = cartItem.querySelector('input[type="text"]');
+                var priceElement = cartItem.querySelector('p');
+
+                var quantity = parseInt(quantityInput.value);
+                var priceText = priceElement.innerText;
+                var price = parseInt(priceText.replace('元', ''));
+
+                if (!isNaN(quantity) && !isNaN(price)) {
+                    totalPrice += quantity * price;
+                }
+            });
+            document.getElementById('total-price').innerText = totalPrice + '元';
+        }
+
+        function checkout() {
+            var items = [];
+            document.querySelectorAll('.cart-item').forEach(function (cartItem) {
+                var itemId = cartItem.getAttribute('data-item-id');
+                var quantity = parseInt(cartItem.querySelector('input[type="text"]').value);
+                var price = cartItem.getAttribute('data-item-price');
+                items.push({ productId: itemId, quantity: quantity, price: price });
+            });
+
+            var totalPrice = document.getElementById('total-price').innerText.replace('元', '');
+
+            document.getElementById('form-items').value = JSON.stringify(items);
+            document.getElementById('form-total-price').value = totalPrice;
+
+            document.getElementById('checkout-form').submit();
+        }
+    </script>
+</body>
+
+</html>

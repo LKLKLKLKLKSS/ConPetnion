@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+	<meta charset="UTF-8">
+	<title>新增活動</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Taipei+Sans+TC:300,400,500,700|Taipei+Sans+TW:300,400,500,700&display=swap">
+	<style>
+		fieldset {
+			width: 500px;
+			border: 3px solid rgba(0, 0, 255, 0.5);
+			border-radius: 10px;
+			margin: 15px;
+		}
+
+		legend {
+			color: #0080FF;
+			font-size: 40px;
+			margin-left: 50px;
+		}
+
+		.box {
+			width: 450px;
+			border-bottom: 1px solid #CECEFF;
+			margin: 20px;
+			padding-bottom: 10px;
+		}
+
+		.button {
+			width: 450px;
+			margin: 20px;
+			text-align: center;
+		}
+
+		.t1 {
+			width: 100px;
+			float: left;
+		}
+
+		#warning {
+			color: red;
+			display: none;
+		}
+
+		form {
+			font-family: "Chilanka", 'Taipei Sans TC', 'Taipei Sans TW', sans-serif;
+			font-optical-sizing: auto;
+			font-weight: weight;
+			font-style: normal;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:replace="~{layout/header}"></div>
+	<form method="post" th:action="@{/addEvent.controller}" enctype="multipart/form-data">
+		<fieldset>
+			<legend class="twchar">主題表單</legend>
+			<div class="box">
+				<label for="eventSubject" class="t1 twchar">主題:</label><input type="text" id="eventSubject"
+					name="eventSubject" autofocus size="10" required>
+			</div>
+			<div class="box">
+				<label for="eventContent" class="t1 twchar">內容:</label>
+				<textarea name="eventContent" id="eventContent" cols="40" rows="5"></textarea>
+			</div>
+			<div class="box">
+				<label for="" class="t1 twchar">舉辦日期:</label> <input type="date" name="eventDate" id="eventDate"
+					value="">
+			</div>
+			<div class="box">
+				<label for="eventPlace" class="t1 twchar">地點:</label><input type="text" id="eventPlace"
+					name="eventPlace" size="30">
+			</div>
+			<div class="box">
+				<label for="" class="t1 twchar">人數限制:</label> <input type="text" name="numberOfParticipant"
+					maxlength="10" pattern="[0-9]*" id="numberOfParticipant"><span id="warning">請輸入數字</span>
+			</div>
+			<div class="box">
+				<label for="" class="t1 twchar">截止日期:</label> <input type="date" name="closingDate" id="closingDate"
+					value="">
+			</div>
+			<div class="box">
+				<label for="" class="t1 twchar">圖片:</label> <input type="file" name="eventImg" id="eventImg"
+					accept=".jpg,.png,.webp">
+			</div>
+		</fieldset>
+		<div class="button">
+			<input class="twchar" type="submit" value="送出">
+			<button class="twchar" type="button" onclick="history.back()">取消</button>
+		</div>
+	</form>
+	<div th:replace="~{layout/footer}"></div>
+	<script>
+		//若人數限制欄位輸入數字以外的內容 顯示警告
+		document.getElementById('numberOfParticipant').addEventListener(
+			'input', function () {
+				let numberOfParticipantInput = this.value;
+				let warning = document.getElementById('warning');
+				let pattern = /^[0-9]+$/;
+				if (pattern.test(numberOfParticipantInput)) {
+					warning.style.display = 'none';
+				} else {
+					warning.style.display = 'inline';
+				}
+			});
+	</script>
+</body>
+
+</html>

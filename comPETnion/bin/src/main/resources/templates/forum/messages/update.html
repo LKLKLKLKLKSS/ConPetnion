@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Message</title>
+</head>
+<body>
+<div th:replace="~{layout/navbarForum}"></div>
+    <h2>Edit Message</h2>
+    
+    <form action="/messages/update" method="post" th:object="${messages}">
+        <input type="hidden" th:field="*{id}"/>
+        
+        <label>Message:</label><br/>
+        <textarea rows="4" cols="50" th:field="*{content}"></textarea><br/><br/>
+        
+        <button type="submit">Update Message</button>
+    </form>
+</body>
+</html>

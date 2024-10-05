@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title th:text="${eventBean.eventSubject}">Get One Event</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+	integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+header h1 {
+	text-align: center;
+	color: blanchedalmond;
+	font-family: Yu Gothic UI Semibold;
+}
+
+h1 a {
+	color: inherit;
+	text-decoration: none;
+}
+
+header {
+	background-color: #484891;
+	margin: 10px;
+	padding: 10px;
+}
+
+nav li {
+	display: inline;
+	margin-right: 20px;
+	color: #FFF8D7;
+	font-family: Yu Gothic UI Semibold;
+	padding: 10px
+}
+
+aside {
+	width: 230px;
+	float: right;
+	padding: 0px 20px 0px 0px;
+}
+
+article {
+	border: 2px solid #FFDCB9;
+	width: 50%;
+	margin: 20px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+img {
+	width: 500px;
+}
+
+section {
+	float: left;
+	width: 100%
+}
+
+.date {
+	color: #000093;
+	opacity: .5;
+	font-family: Yu Gothic UI Semibold;
+}
+
+.hover:hover {
+	background-color: #FFF8D7;
+	color: #484891;
+}
+
+.fa-solid {
+	font-size: 30px;
+}
+
+p {
+	font-family: Yu Gothic UI Semibold;
+}
+
+.blue {
+	color: #3A006F;
+}
+
+.deadline {
+	color: red;
+}
+
+h2 {
+	font-size: 30px;
+}
+.fa-house {
+	font-size: 50px;
+	float: right;
+	margin-right: 20px;
+	margin-top: -10px;
+	color:white;
+}
+#event {
+	background-color: #FFF8D7;
+	color: #484891;
+}
+.fa-plus{
+    padding:10px
+}
+.fa-plus:hover {
+	background-color: #484891;
+	color: white;
+}
+
+nav a {
+    color: inherit;
+    text-decoration: none;
+}
+</style>
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<h1>
+				<a href="GetAllEvents">comPETnion</a>
+			</h1>
+			<nav>
+				<ul>
+					<a href="html/member/Login.html"><li class="hover">會員</li></a>
+					<a href="html/product/indexProduct.html"><li class="hover">商品</li></a>
+					<a href="html/adopt/Insert.html"><li class="hover">領養</li></a>
+					<a href="html/forum/index.html"><li class="hover">論壇</li></a>
+					<a href="indexEvent.html"><li class="hover"><li class="hover" id="event">活動</li></a>
+					<li><a href="html/event/indexEvent.html"><i class="fa-solid fa-house"></i></a></li>
+				</ul>
+			</nav>
+		</header>
+		<aside>
+			<i class="fa-solid fa-plus" onclick="insertEvent()">新增</i>
+
+			<form method="get" th:action="@{/findEventByKeyword.controller}">
+				<input type="text" name="keyword" id="">
+				<button type="submit">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</button>
+			</form>
+		</aside>
+		<section>
+			<div>
+				<article>
+					<p>
+						活動ID:
+						<span th:text="${eventBean.eventId}"></span></p>
+					<figure>
+						<img th:src="@{/photos/download(eventId=${eventBean.eventId})}" alt="">
+					</figure>
+					<p>
+						主辦會員ID:
+						<span th:text="${eventBean.hostMemberId}"></span></p>
+					<h2 th:text="${eventBean.eventSubject}"></h2>
+					<span class="date" id="date">ReleaseDate: <span th:text="${#dates.format(eventBean.releaseDate, 'yyyy-MM-dd')}"></span></span><br>
+                    <span class="date" id="update">Update: <span th:text="${#dates.format(eventBean.updateDate, 'yyyy-MM-dd')}"></span></span>
+					<p class="blue">
+						活動舉辦日期:
+						<span th:text="${eventBean.eventDate}"></span>
+						</p>
+					<p class="blue">
+						活動舉辦地點:
+						<span th:text="${eventBean.eventPlace}"></span>
+						</p>
+					<p class="blue">
+						人數限制:
+						<span th:text="${eventBean.numberOfParticipant}"></span>
+						</p>
+					<p class="deadline">
+						報名截止日期:
+						<span th:text="${eventBean.closingDate}"></span></p>
+					<p th:text="${eventBean.eventContent}">
+
+                <a th:href="@{'updateEventForm?eventId=' + ${eventBean.eventId}}"><i class="fa-solid fa-pen"></i>修改</a>
+                <a th:href="@{'deleteEvent.controller?eventId=' + ${eventBean.eventId}}"><i class="fa-solid fa-trash-can"></i>刪除</a>
+				</article>
+			</div>
+		</section>
+
+
+	</div>
+	<script>
+		function insertEvent() {
+			window.location.href = "insertPage";
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>修改商品</title>
+</head>
+<body>
+<h1>修改商品</h1>
+    <form th:action="@{'/product/update/' + ${product.productID}}" method="post" enctype="multipart/form-data">
+        <label for="productCondition">商品狀態:</label>
+        <select id="productCondition" name="productCondition" th:value="${product.productCondition}">
+            <option value="1" th:selected="${product.productCondition == 1}">上架</option>
+            <option value="2" th:selected="${product.productCondition == 2}">下架</option>
+        </select><br/>
+
+        <label for="productTitle">商品名稱:</label>
+        <input type="text" id="productTitle" name="productTitle" th:value="${product.productTitle}" /><br/>
+
+        <label for="productDesc">商品描述:</label>
+        <textarea id="productDesc" name="productDesc" th:text="${product.productDesc}"></textarea><br/>
+
+        <label for="productPrice">商品價錢:</label>
+        <input type="number" id="productPrice" name="productPrice" th:value="${product.productPrice}" /><br/>
+
+        <label for="productStock">商品庫存:</label>
+        <input type="number" id="productStock" name="productStock" th:value="${product.productStock}" /><br/>
+
+        <label for="productLaunchDate">商品上架日期:</label>
+        <input type="date" id="productLaunchDate" name="productLaunchDate" th:value="${#dates.format(product.productLaunchDate, 'yyyy-MM-dd')}" /><br/>
+
+        <label for="productSold">已售數量:</label>
+        <input type="number" id="productSold" name="productSold" th:value="${product.productSold}" /><br/>
+
+        <label for="productImageMain">商品主圖:</label>
+        <input type="file" id="productImageMain" name="productImageMain" /><br/>
+
+        <label for="productImage1">商品副圖1:</label>
+        <input type="file" id="productImage1" name="productImage1" /><br/>
+
+        <label for="productImage2">商品副圖2:</label>
+        <input type="file" id="productImage2" name="productImage2" /><br/>
+
+        <label for="productImage3">商品副圖3:</label>
+        <input type="file" id="productImage3" name="productImage3" /><br/>
+
+        <label for="productImage4">商品副圖4:</label>
+        <input type="file" id="productImage4" name="productImage4" /><br/>
+
+        <label for="productType">商品類型:</label>
+        <select id="productType" name="productType">
+            <option value="1" th:selected="${product.productType == '狗糧'}">狗糧</option>
+            <option value="2" th:selected="${product.productType == '貓糧'}">貓糧</option>
+            <option value="3" th:selected="${product.productType == '狗玩具'}">狗玩具</option>
+            <option value="4" th:selected="${product.productType == '貓玩具'}">貓玩具</option>
+            <option value="5" th:selected="${product.productType == '狗狗用品'}">狗狗用品</option>
+            <option value="6" th:selected="${product.productType == '貓咪用品'}">貓咪用品</option>
+        </select><br/>
+
+        <button type="submit">更新完成</button>
+    </form>
+</body>
+</html>

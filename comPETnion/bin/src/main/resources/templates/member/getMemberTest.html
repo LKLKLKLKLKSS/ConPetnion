@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:replace="~{member/navbarMember}"></div>
+<div class="container">
+    <h2>會員資料</h2>
+    <table>
+        <tr>
+            <th>會員照片</th>
+            <th>會員姓名</th>
+            <th>會員帳號</th>          
+            <th>會員年紀</th>
+            <th>會員電話</th>
+            <th>會員地址</th>
+            <th>編輯</th>
+           
+        </tr>
+     
+            <tr>
+            <input type="hidden" name="memberEmail" th:value="${member.memberEmail}">
+                <td><img th:src="@{/members/download(memberId=${member.memberId})}" alt="Member Image" width="100px"></td>
+                <td th:text="${member.memberName}"></td>
+                <td th:text="${member.memberEmail}"></td>                
+                <td th:text="${member.memberAge}"></td>
+                <td th:text="${member.memberPhone}"></td>
+                <td th:text="${member.memberAddress}"></td>
+                <td><a th:href="@{/members/getonememberdata(memberEmail=${member.memberEmail})}">編輯</a></td>
+                
+            </tr>
+      
+    </table>
+ 
+    <a th:href="@{/members/memberfunction}">回到會員功能區</a>
+</div>
+</body>
+</html>

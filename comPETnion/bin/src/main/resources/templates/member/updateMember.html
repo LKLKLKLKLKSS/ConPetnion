@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<div th:replace="~{layout/navbarMember}"></div>
+
+<body>
+
+    <div align="center">
+        <h2>修改會員資料</h2>
+        <form method="post" th:action="@{/members/updatemember}" enctype="multipart/form-data">
+            <table>
+                
+                <tr>
+                    <td>會員照片:
+                    <td><input type="file" name="memberImg" th:value="${member.getMemberImg}">
+                </tr>
+                <tr><input type="hidden" name="originalImg" th:value="${member.getMemberImg}"></tr>
+                <tr>
+                    <td>會員姓名:
+                    <td><input type="text" name="memberName" th:value="${member.getMemberName}">
+                </tr>
+                <tr>
+                    <td>會員帳號:
+                    <td><input type="email" name="memberEmail" th:value="${member.getMemberEmail}" readonly>
+                </tr>
+                <tr>
+                    <td>會員密碼:
+                    <td><input type="password" name="memberPassword" th:value="${member.getMemberPassword}">
+                </tr>
+                <tr><input type="hidden" name="oldMemberAge" th:value="${member.getMemberAge}"></tr>
+                <tr>
+                    <td>會員年紀:
+                    <td><input type="date" name="memberAge" th:value="${member.getMemberAge}" id="memberAge">
+                </tr>
+                <tr>
+                    <td>會員電話:
+                    <td><input type="tel" name="memberPhone" th:value="${member.getMemberPhone}">
+                </tr>
+                <tr>
+                   
+                    <td>會員地址:
+                    <td>
+                        <select name="memberAddress">
+                            <option th:value="${member.memberAddress}" th:text="${member.memberAddress}" selected="selected"></option>
+                            <option value="台北市">台北市</option>
+                            <option value="新北市">新北市</option>
+                            <option value="桃園市">桃園市</option>
+                            <option value="台中市">台中市</option>
+                            <option value="台南市">台南市</option>
+                            <option value="高雄市">高雄市</option>
+                            <option value="基隆市">基隆市</option>
+                            <option value="新竹市">新竹市</option>
+                            <option value="新竹縣">新竹縣</option>
+                            <option value="苗栗縣">苗栗縣</option>
+                            <option value="彰化縣">彰化縣</option>
+                            <option value="南投縣">南投縣</option>
+                            <option value="雲林縣">雲林縣</option>
+                            <option value="嘉義市">嘉義市</option>
+                            <option value="嘉義縣">嘉義縣</option>
+                            <option value="屏東縣">屏東縣</option>
+                            <option value="宜蘭縣">宜蘭縣</option>
+                            <option value="花蓮縣">花蓮縣</option>
+                            <option value="台東縣">台東縣</option>
+                            <option value="澎湖縣">澎湖縣</option>
+                            <option value="金門縣">金門縣</option>
+                            <option value="連江縣">連江縣</option>
+                        </select>
+                        <input type="hidden" name="memberId" th:value="${member.memberId}">
+                       
+                        <input type="hidden" name="memberstatusId" th:value="${member.memberstatusId}">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align: center;"><input type="submit" value="確定"></td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+<script>
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('memberAge').setAttribute('max', today);
+        });
+  
+</script>
+</body>
+
+</html>

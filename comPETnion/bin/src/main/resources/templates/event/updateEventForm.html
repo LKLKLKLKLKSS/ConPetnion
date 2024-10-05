@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>活動修改</title>
+<style>
+fieldset {
+	width: 500px;
+	border: 3px solid rgba(0, 0, 255, 0.5);
+	border-radius: 10px;
+	margin: 15px;
+}
+
+legend {
+	color: #0080FF;
+	font-size: 40px;
+	margin-left: 50px;
+}
+
+.box {
+	width: 450px;
+	border-bottom: 1px solid #CECEFF;
+	margin: 20px;
+	padding-bottom: 10px;
+}
+
+.button {
+	width: 450px;
+	margin: 20px;
+	text-align: center;
+}
+
+.t1 {
+	width: 100px;
+	float: left;
+}
+
+#warning {
+	color: red;
+	display: none;
+}
+</style>
+</head>
+<body>
+<div th:replace="~{layout/header}"></div>
+	<form method="post" th:action="@{/updateEvent.controller}"
+		enctype="multipart/form-data" th:object="${eventBean}">
+		<input type="hidden" name="_method" value="PUT" />
+		<fieldset>
+			<legend>主題更新表單</legend>
+			<div class="box">
+				<label for="eventId" class="t1">活動號碼:</label><input type="text"
+					id="eventId" name="eventId" autofocus size="10"
+					th:value="${eventBean.eventId}" readonly>
+			</div>
+			<div class="box">
+				<label for="hostMemberId" class="t1">主辦id:</label><input type="text"
+					id="hostMemberId" name="hostMemberId" size="10"
+					th:value="${eventBean.hostMemberId}">
+			</div>
+			<div class="box">
+				<label for="eventSubject" class="t1">主題:</label><input type="text"
+					id="eventSubject" name="eventSubject" size="10"
+					th:value="${eventBean.eventSubject}">
+			</div>
+			<div class="box">
+				<label for="eventContent" class="t1">內容:</label>
+				<textarea name="eventContent" id="eventContent" cols="40" rows="5"
+					th:text="${eventBean.eventContent}"></textarea>
+			</div>
+			<div class="box">
+				<label for="eventDate" class="t1">舉辦日期:</label> 
+				<input type="date" name="eventDate" id="eventDate" th:value="${#dates.format(eventBean.eventDate, 'yyyy-MM-dd')}">
+			</div>
+			<div class="box">
+				<label for="eventPlace" class="t1">地點:</label><input type="text"
+					id="eventPlace" name="eventPlace" size="40"
+					th:value="${eventBean.eventPlace}">
+			</div>
+			<div class="box">
+				<label for="numberOfParticipant" class="t1">人數限制:</label> 
+				<input type="text" name="numberOfParticipant" maxlength="10" pattern="^[0-9]+$"
+					id="numberOfParticipant"
+					th:value="${eventBean.numberOfParticipant}"> 
+					<span id="warning">請輸入數字</span>
+			</div>
+			<div class="box">
+				<label for="closingDate" class="t1">截止日期:</label> 
+				<input type="date" name="closingDate" id="closingDate" th:value="${#dates.format(eventBean.closingDate, 'yyyy-MM-dd')}">
+			</div>
+			<input type="checkbox" id="keepOriginal" name="keepOriginal" value="true" th:checked="${false}">保留原圖<br>
+			<div class="box">
+				<label for="eventImg" class="t1" id="img">圖片:</label> 
+				<input type="file" name="eventImg" id="eventImg" accept=".jpg,.png,.webp"> 
+
+				
+			</div>
+		</fieldset>
+		<div class="button">
+			<input type="submit" value="送出">
+			<button type="button" onclick="history.back()">取消</button>
+		</div>
+	</form>
+	<div th:replace="~{layout/footer}"></div>
+	<script>
+		document.getElementById('keepOriginal').addEventListener('change',
+				function() {
+					let newImageUpload = document.getElementById('eventImg');
+					let labelImg = document.getElementById('img');
+					if (this.checked) {
+						newImageUpload.style.display = 'none';
+						labelImg.style.display = 'none';
+					} else {
+						newImageUpload.style.display = 'block';
+						labelImg.style.display = 'inline';
+					}
+				});
+		//若人數限制欄位輸入數字以外的內容 顯示警告
+		document.getElementById('numberOfParticipant').addEventListener(
+				'input', function() {
+					let numberOfParticipantInput = this.value;
+					let warning = document.getElementById('warning');
+					let pattern = /^[0-9]+$/;
+					if (pattern.test(numberOfParticipantInput)) {
+						warning.style.display = 'none';
+					} else {
+						warning.style.display = 'inline';
+					}
+				});
+	</script>
+</body>
+</html>

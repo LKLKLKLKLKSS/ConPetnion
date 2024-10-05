@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主題資料</title>
+
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+
+    <!-- Include jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Include DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+</head>
+
+<body>
+   <div th:replace="~{layout/navbarForum}"></div>
+    <div class="container ">
+        <form method="post" th:action="@{/findAllPost}">
+            <table id="myTable" class="display cell-border stripe nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>主題Id</th>
+                        <th>主題名稱</th>
+                        <th>主題內容</th>
+                        <th>版主Id</th>
+                        <th>狀態</th>
+                        <th>修改</th>
+                        <th>刪除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="themeBean: ${arrayList}">
+                        <td th:text="${themeBean.themeId}"></td>
+                        <td th:text="${themeBean.themeName}"></td>
+                        <td th:text="${themeBean.themeDescription}"></td>
+                        <!-- <td th:text="${post.memberId}"></td> -->
+                        <td th:text="${themeBean.memberId} "></td>
+                         <td th:text="${themeBean.isShow} ? '顯示' : '封鎖' "></td>
+                        <td><a th:href="@{/findByThemeIdUpdata(id=${themeBean.themeId})}">修改</a></td>
+                        <td>
+                            <a class="delete" th:href="@{/deleteTheme(id=${themeBean.themeId})}"
+                                onclick="return confirm('你確定要刪除這個主題嗎？');">刪除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "language": {
+                    "processing": "處理中...",
+                    "loadingRecords": "載入中...",
+                    "paginate": {
+                        "first": "第一頁",
+                        "previous": "上一頁",
+                        "next": "下一頁",
+                        "last": "最後一頁"
+                    },
+                    "emptyTable": "目前沒有資料",
+                    "zeroRecords": "沒有符合的資料",
+                    "info": "顯示第 _START_ 至 _END_ 筆結果，共 _TOTAL_ 筆",
+                    "infoEmpty": "顯示第 0 至 0 筆結果，共 0 筆",
+                    "infoFiltered": "(從 _MAX_ 筆結果中篩選)",
+                    "search": "搜尋：",
+                    "searchPlaceholder": "請輸入關鍵字",
+                    "lengthMenu": "顯示 _MENU_ 筆結果",
+                    "loadingRecords": "載入中...",
+                    "processing": "處理中...",
+                    "aria": {
+                        "sortAscending": "：升冪排列",
+                        "sortDescending": "：降冪排列"
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

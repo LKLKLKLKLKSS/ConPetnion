@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Product Back Page</title>
+</head>
+<body>
+    <h1>後台首頁</h1>
+    <form action="/comPETnion/product/add" method="post" enctype="multipart/form-data">
+        <label for="productCondition">商品狀態:</label>
+        <select id="productCondition" name="productCondition">
+            <option value="1">上架</option>
+            <option value="2">下架</option>
+        </select><br/>
+
+        <label for="productTitle">商品名稱:</label>
+        <input type="text" id="productTitle" name="productTitle" /><br/>
+
+        <label for="productDesc">商品描述:</label>
+        <textarea id="productDesc" name="productDesc"></textarea><br/>
+
+        <label for="productPrice">商品價錢:</label>
+        <input type="number" id="productPrice" name="productPrice" /><br/>
+
+        <label for="productStock">商品庫存:</label>
+        <input type="number" id="productStock" name="productStock" /><br/>
+
+        <label for="productLaunchDate">商品上架日期:</label>
+        <input type="date" id="productLaunchDate" name="productLaunchDate" /><br/>
+
+        <label for="productSold">已售數量:</label>
+        <input type="number" id="productSold" name="productSold" /><br/>
+
+        <label for="productImageMain">商品主圖:</label>
+        <input type="file" id="productImageMain" name="productImageMain" /><br/>
+
+        <label for="productImage1">商品副圖1:</label>
+        <input type="file" id="productImage1" name="productImage1" /><br/>
+
+        <label for="productImage2">商品副圖2:</label>
+        <input type="file" id="productImage2" name="productImage2" /><br/>
+
+        <label for="productImage3">商品副圖3:</label>
+        <input type="file" id="productImage3" name="productImage3" /><br/>
+
+        <label for="productImage4">商品副圖4:</label>
+        <input type="file" id="productImage4" name="productImage4" /><br/>
+
+        <label for="productType">商品類型:</label>
+        <select id="productType" name="productType">
+            <option value="1">狗糧</option>
+            <option value="2">貓糧</option>
+            <option value="3">狗玩具</option>
+            <option value="4">貓玩具</option>
+            <option value="5">狗狗用品</option>
+            <option value="6">貓咪用品</option>
+        </select><br/>
+
+        <button type="submit">新增完成</button>
+    </form>
+</body>
+</html>
